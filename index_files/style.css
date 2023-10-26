@@ -40,7 +40,7 @@ section {
   background: var(--bgcolor);
 }
 
-section, section:target, section:last-of-type {
+section, section:target ~ section:last-of-type  {
   display: none;
 }
 section:target, section:last-of-type {
