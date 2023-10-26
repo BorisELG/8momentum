@@ -40,6 +40,13 @@ section {
   background: var(--bgcolor);
 }
 
+section, section:target ~ section:last-of-type {
+  display: none;
+}
+section:target, section:last-of-type {
+  display: inherit;
+}
+
 section:target { /* Show section */
   display: block;
 }
@@ -430,7 +437,7 @@ article time {
   top: .75em;
   right: .5em;
   z-index: 4;
-}
+  }
 
 /* ------- Smaller screens ------- */
 
