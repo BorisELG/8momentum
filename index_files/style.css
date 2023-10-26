@@ -40,10 +40,10 @@ section {
   background: var(--bgcolor);
 }
 
-section, section:target ~ section:last-of-type {
+section, section:target {
   display: none;
 }
-section:target, section:last-of-type {
+section:target {
   display: inherit;
 }
 
