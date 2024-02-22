@@ -21,3 +21,6 @@ superuser:
 .PHONY: run
 run: venv
 	$(PYTHON) manage.py runserver
+
+deploy:
+	fly deploy --ha=false

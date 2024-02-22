@@ -8,14 +8,34 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif, Apple Color Emoji, "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box;
+  
+  /* Color scheme */
+  
+  --textcolor: #dadada;
+  --bgcolor: #141414;
+  --highlight: #8f8f8f;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    --textcolor: #dadada;
+    --bgcolor: #141414;
+    --highlight: #8f8f8f;
+  }
+}
+
+
 body {
-  min-height: 100vh;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
-  display: grid;
-  gap: 3vw;
-  grid-template-rows: min-content 1fr min-content;
+  font-size: 18px;
+  font-family: system-ui, sans-serif;
+  line-height: 1.4;
+  color: var(--textcolor);
+  background: var(--bgcolor);
+  position: relative;
+  max-width: 64em;  /* remove this for a full-width layout */
+  margin: 0 auto;  /* centers the layout */
 }
 
 a {
@@ -23,16 +43,36 @@ a {
 }
 
 footer {
-  border-top: 2px dotted;
+  border-top: 2px;
   text-align: center;
 }
 
 header {
-  border-bottom: 2px dotted;
+  padding-top: 5vw;
+  padding-bottom: 2.5vw;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-.template-homepage main {
-  text-align: center;
+header h1 {
+  font-size: 1em;
+  flex: 1; /* pushes nav to the right */
+  white-space: nowrap;
+  padding: 0 5vw .5em 0;
+}
+
+header nav a:not(:last-of-type) {
+  margin-right: 1.5vw;
+}
+
+a {
+  text-decoration: none;
+  color: var(--highlight);
+}
+
+a:hover {
+  border-bottom: 1px solid;
 }
 
 .skip-link {
@@ -43,3 +83,15 @@ header {
 .skip-link:focus-visible {
   top: 5px;
 }
+
+p {
+  margin-bottom: 0.6em
+}
+
+img, svg, video, audio {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  fill: currentColor;
+}
+
