@@ -1,0 +1,22 @@
+{% load static wagtailimages_tags gallery_tags %}
+
+  <link rel="stylesheet" href="{% static 'css/baguetteBox.min.css' %}"/>
+  <div class="row gallery-container">
+  {% for img in gallery_images %}
+    {% image img fill-250x250 as img_thumb %}
+    <div class="gallery-thumbnail-container col-xs-3">
+      <a href="{{ img|original_url }}" title="{{ img_thumb.alt|hide_num_order }}">
+        <img src="{{ img_thumb.url }}" alt="{{ img_thumb.alt }}" class="gallery-thumbnail">
+      </a>
+      <link rel="preload" href="{{ img|original_url }}">
+    </div>
+  {% endfor %}
+  </div>
+
+
+  {% if page.use_lightbox or use_lightbox %}
+  <script src="{% static 'js/baguetteBox.min.js' %}"></script>
+  <script type="text/javascript">
+    baguetteBox.run('.gallery-container');
+  </script>
+  {% endif %}
