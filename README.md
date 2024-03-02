@@ -14,54 +14,48 @@ Welcome to my personal website, 8momentum.
 
 ## Features
 
--   **Unified Blog and Personal Posts:** Share a mix of thoughts, experiences, updates, and personal stories.
--   **Media Galleries:** Showcase personal photos and favorite songs in dedicated galleries.
+-   **Blog:** blog with chaotic blog posts.
+-   **Media gallery:** photos and songs in dedicated galleries.
 
 ## Installation
 
 1.  **Clone the Repository:**
 
-    bashCopy code
-
-    `git clone https://github.com/your-username/your-repo.git
-    cd your-repo`
+    ```bash
+    git clone https://github.com/your-username/your-repo.git
+    cd your-repo
+    ```
 
 2.  **Create Virtual Environment:**
 
-    bashCopy code
-
-    `python -m venv venv
-    source venv/bin/activate  # For Linux/Mac
-    # OR
-    .\venv\Scripts\activate  # For Windows`
+    ```bash
+    python -m venv venv
+    source venv/bin/activate
+    ```
 
 3.  **Install Dependencies:**
 
-    bashCopy code
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-    `pip install -r requirements.txt`
+4.  **Apply Migrations:**
 
-4.  **Database Setup:**
+    ```bash
+    python manage.py migrate
+    ```
 
-    -   Create a PostgreSQL database.
-    -   Update the database settings in `your_project/settings/base.py`.
-5.  **Apply Migrations:**
+5.  **Create Superuser (Admin):**
 
-    bashCopy code
+    ```bash
+    python manage.py createsuperuser
+    ```
 
-    `python manage.py migrate`
+6.  **Run the Development Server:**
 
-6.  **Create Superuser (Admin):**
-
-    bashCopy code
-
-    `python manage.py createsuperuser`
-
-7.  **Run the Development Server:**
-
-    bashCopy code
-
-    `python manage.py runserver`
+    ```bash
+    python manage.py runserver
+    ```
 
     Visit `http://127.0.0.1:8000` in your browser to access the local development server.
 
