@@ -1,6 +1,6 @@
-# Personal Website README
+# 8momentum website
 
-Welcome to my personal website! This blog, powered by Wagtail CMS, deployed on Fly.io, and utilizing a PostgreSQL database, is designed to provide a genuine and uncluttered experience, fostering creativity and stimulating indie developers. Below, you'll find information on how to set up, run, and contribute to this project.
+Welcome to my personal website, 8momentum.
 
 ## Table of Contents
 
