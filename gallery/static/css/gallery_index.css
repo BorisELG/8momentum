@@ -1,0 +1,15 @@
+h2 {
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin-bottom: 2em;
+}
+
+time {
+    margin-left: 0.6em;
+    font-size: .8em;
+    font-weight: 400;
+}

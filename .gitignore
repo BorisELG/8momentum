@@ -15,6 +15,7 @@
 # vendor/
 
 venv/
+media/
 
 db.sqlite3
 

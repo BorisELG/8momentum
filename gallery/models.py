@@ -1,144 +1,102 @@
-from django.conf import settings
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django import forms
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
-from wagtail.admin.panels import FieldPanel
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
+from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.models import Page
-
-from wagtail.images import get_image_model
-
-from django.shortcuts import render, redirect
-from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from taggit.models import Tag
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 
-IMAGE_ORDER_TYPES = (
-    (1, "Image title"),
-    (2, "Newest image first"),
-)
-
-
-class SimpleGalleryIndex(RoutablePageMixin, Page):
-    intro_title = models.CharField(
-        verbose_name=_("Intro title"),
-        max_length=250,
-        blank=True,
-        help_text=_("Optional H1 title for the gallery page."),
+class GalleryPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'GalleryPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
     )
-    intro_text = RichTextField(
-        blank=True, verbose_name=_("Intro text"), help_text=_("Optional text to go with the intro text.")
-    )
-    collection = models.ForeignKey(
-        "wagtailcore.Collection",
-        verbose_name=_("Collection"),
-        null=True,
-        blank=False,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        help_text=_("Show images in this collection in the gallery view."),
-    )
-    images_per_page = models.IntegerField(
-        default=8, verbose_name=_("Images per page"), help_text=_("How many images there should be on one page.")
-    )
-    use_lightbox = models.BooleanField(
-        verbose_name=_("Use lightbox"),
-        default=True,
-        help_text=_("Use lightbox to view larger images when clicking the thumbnail."),
-    )
-    order_images_by = models.IntegerField(choices=IMAGE_ORDER_TYPES, default=1)
 
-    content_panels = Page.content_panels + [
-        FieldPanel("intro_title", classname="full title"),
-        FieldPanel("intro_text", classname="full title"),
-        FieldPanel("collection"),
-        FieldPanel("images_per_page", classname="full title"),
-        FieldPanel("use_lightbox"),
-        FieldPanel("order_images_by"),
-    ]
+class GalleryTagIndexPage(Page):
 
-    @property
-    def images(self, tags=None):
-        return get_gallery_images(self.collection.name, self)
+    def get_context(self, request):
 
-    @property
-    def tags(self):
-        return self.get_gallery_tags()
+        # Filter by tag
+        tag = request.GET.get('tag')
+        gallerypages = GalleryPage.objects.filter(tags__name=tag)
 
-    def get_context(self, request, *args, **kwargs):
-        images = self.images
-        tags = self.tags
-        context = super(SimpleGalleryIndex, self).get_context(request)
-        page = request.GET.get("page")
-        paginator = Paginator(images, self.images_per_page)
-        try:
-            images = paginator.page(page)
-        except PageNotAnInteger:
-            images = paginator.page(1)
-        except EmptyPage:
-            images = paginator.page(paginator.num_pages)
-        context["gallery_images"] = images
-        context["gallery_tags"] = tags
+        # Update template context
+        context = super().get_context(request)
+        context['gallerypages'] = gallerypages
         return context
 
-    def get_gallery_tags(self, tags=None):
-        if tags is None:
-            tags = []
-        images = get_gallery_images(self.collection.name, self, tags=tags)
-        for img in images:
-            tags += img.tags.all()
-        tags = sorted(set(tags))
-        return tags
+@register_snippet
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    author_image = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
 
-    @route("^tags/$", name="tag_archive")
-    @route("^tags/([\w-]+)/$", name="tag_archive")
-    def tag_archive(self, request, tag=None):
-        taglist = []
-        try:
-            tag = Tag.objects.get(slug=tag)
-        except Tag.DoesNotExist:
-            return redirect(self.url)
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('author_image'),
+    ]
 
-        taglist.append(tag)
-        images = get_gallery_images(self.collection.name, self, tags=taglist)
-        tags = self.get_gallery_tags(tags=taglist)
-        paginator = Paginator(images, self.images_per_page)
-        page = request.GET.get("page")
-        try:
-            images = paginator.page(page)
-        except PageNotAnInteger:
-            images = paginator.page(1)
-        except EmptyPage:
-            images = paginator.page(paginator.num_pages)
-        context = self.get_context(request)
-        context["gallery_images"] = images
-        context["gallery_tags"] = tags
-        context["current_tag"] = tag
-        return render(
-            request,
-            getattr(settings, "SIMPLE_GALLERY_TEMPLATE", "gallery/gallery_index.html"),
-            context,
-        )
+    def __str__(self):
+        return self.name
 
     class Meta:
-        verbose_name = _(getattr(settings, "SIMPLE_GALLERY_PAGE_TYPE", "Gallery index"))
+        verbose_name_plural = 'Authors'
 
-    template = getattr(settings, "SIMPLE_GALLERY_TEMPLATE", "gallery/gallery_index.html")
+class GalleryIndexPage(Page):
+    intro = RichTextField(blank=True)
 
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        gallerypages = self.get_children().live().order_by('-first_published_at')
+        context['gallerypages'] = gallerypages
+        return context
 
-def get_gallery_images(collection, page=None, tags=None):
-    # Tags must be a list of tag names like ["Hasthag", "Kawabonga", "Winter is coming"]
-    images = None
-    try:
-        images = get_image_model().objects.filter(collection__name=collection).prefetch_related("tags")
-        if page:
-            if page.order_images_by == 1:
-                images = images.order_by("title")
-            elif page.order_images_by == 2:
-                images = images.order_by("-created_at")
-    except Exception as e:
-        pass
-    if images and tags:
-        images = images.filter(tags__name__in=tags).prefetch_related("tags").distinct()
-    return images
+    content_panels = Page.content_panels + [
+        FieldPanel('intro')
+    ]
+
+class GalleryPage(Page):
+    date = models.DateField("Post date")
+    intro = models.CharField(max_length=250)
+    body = RichTextField(blank=True)
+    authors = ParentalManyToManyField('gallery.Author', blank=True)
+    
+    tags = ClusterTaggableManager(through=GalleryPageTag, blank=True)
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('date'),
+            FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('tags'),
+        ], heading="Gallery information"),
+        FieldPanel('intro'),
+        FieldPanel('body'),
+        InlinePanel('gallery_images', label="Gallery images"),
+    ]
+
+class GalleryPageGalleryImage(Orderable):
+    page = ParentalKey(GalleryPage, on_delete=models.CASCADE, related_name='gallery_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=250)
+
+    panels = [
+        FieldPanel('image'),
+        FieldPanel('caption'),
+    ]
