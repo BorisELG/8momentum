@@ -8,22 +8,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
-        ('wagtailcore', '0089_log_entry_data_json_null_to_object'),
+        ("blog", "0001_initial"),
+        ("wagtailcore", "0089_log_entry_data_json_null_to_object"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BlogPage',
+            name="BlogPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('date', models.DateField(verbose_name='Post date')),
-                ('intro', models.CharField(max_length=250)),
-                ('body', wagtail.fields.RichTextField(blank=True)),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.page",
+                    ),
+                ),
+                ("date", models.DateField(verbose_name="Post date")),
+                ("intro", models.CharField(max_length=250)),
+                ("body", wagtail.fields.RichTextField(blank=True)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('wagtailcore.page',),
+            bases=("wagtailcore.page",),
         ),
     ]

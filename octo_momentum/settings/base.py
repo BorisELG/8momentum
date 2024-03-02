@@ -164,7 +164,6 @@ STORAGES = {
 }
 
 
-
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "octo_momentum"

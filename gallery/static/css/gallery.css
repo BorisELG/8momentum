@@ -3,7 +3,7 @@
       max-width: 100%;
     }
   }
-  
+
   @media screen and (min-width: 50em) {
     .listing.images > li {
       padding: 0.6rem;
@@ -11,27 +11,27 @@
       max-height: 160px;
       border: 0;
     }
-  
+
     .listing.images > li .image {
       max-height: 160px;
       height: auto;
     }
-  
+
     .listing.images {
       border: 0;
     }
-  
+
     .listing.images > li .image img {
       max-height: 132px;
       max-width: 132px;
     }
-  
+
   }
-  
+
   .listing.images img {
     box-shadow: 1px 1px 3px #333;
   }
-  
+
   .listing h3 {
     padding-top: 3px;
     max-width: 168px;

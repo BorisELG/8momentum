@@ -20,18 +20,18 @@ time {
     position: relative;
     border: 0;
   }
-  
+
   .grid a:hover {
     transform: scale(.975);
   }
-  
+
   /* For a square ratio */
   .grid a:before {
     content: "";
     display: block;
     padding-top: 100%;
   }
-  
+
   .grid a img {
     position: absolute;
     top: 0;

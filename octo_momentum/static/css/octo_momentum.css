@@ -9,9 +9,9 @@ html {
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box;
-  
+
   /* Color scheme */
-  
+
   --textcolor: #dadada;
   --bgcolor: #141414;
   --highlight: #8f8f8f;
@@ -94,4 +94,3 @@ img, svg, video, audio {
   height: auto;
   fill: currentColor;
 }
-
