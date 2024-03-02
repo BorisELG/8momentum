@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gallery_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/baguetteBox.min.css' %}"/>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/baguetteBox.min.js' %}"></script>
+<script type="text/javascript">
+  baguetteBox.run('.gallery-container');
+</script>
+{% endblock %}
+
+{% block body_class %}template-gallerypage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }} <time class="meta">{{ page.date }}</time></h1>
+
+    {% with authors=page.authors.all %}
+        {% if authors %}
+            <h3>Posted by:</h3>
+            <ul>
+                {% for author in authors %}
+                    <li style="display: inline">
+                        {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                        {{ author.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="intro">{{ page.intro }}</div>
+
+    {{ page.body|richtext }}
+    <div class="grid gallery-container">
+    {% for item in page.gallery_images.all %}
+        {% image item.image original as img%}
+        <a href="{{ img.url }}" title="{{item.caption}}">
+            <img src="{{ img.url }}" alt="{{ img.alt }}" class="gallery-thumbnail" loading="lazy">
+        </a>
+    {% endfor %}
+    </div>
+
+    <p><a href="{{ page.get_parent.url }}">Return to gallery</a></p>
+
+    {% with tags=page.tags.all %}
+        {% if tags %}
+            <div class="tags">
+                <h3>Tags</h3>
+                {% for tag in tags %}
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}

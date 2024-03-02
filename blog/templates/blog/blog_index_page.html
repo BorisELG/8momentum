@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog_index.css' %}">
+{% endblock %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+    <!-- <h1>{{ page.title }}</h1> -->
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+    {% for post in blogpages %}
+        {% with post=post.specific %}
+            <h2><a href="{% pageurl post %}">{{ post.title }}</a><time>{{ post.date }}</time></h2>
+            <p>{{ post.intro }}</p>
+            <!-- {{ post.body|richtext }} -->
+        {% endwith %}
+    {% endfor %}
+
+{% endblock %}
