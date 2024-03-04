@@ -28,3 +28,6 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v5.1.0
