@@ -34,4 +34,4 @@ jobs:
       with:
           context: .
           push: true
-          tags: 8momentum:latest
+          tags:  ghcr.io/BorisELG/8momentum:latest
