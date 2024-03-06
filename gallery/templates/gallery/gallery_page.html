@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags%}
 
 {% block extra_css %}
     {% load static %}
@@ -39,9 +39,9 @@
     {{ page.body|richtext }}
     <div class="grid gallery-container">
     {% for item in page.gallery_images.all %}
-        {% image item.image original as img%}
-        <a href="{{ img.url }}" title="{{item.caption}}">
-            <img src="{{ img.url }}" alt="{{ img.alt }}" class="gallery-thumbnail" loading="lazy">
+        {% image item.image webpquality-50 as img%}
+        <a href="{% image_url item.image 'original' %}" title="{{item.caption}}">
+            <img src="{% image_url item.image 'jpegquality-40' %}" alt="{{ img.alt }}" class="gallery-thumbnail" loading="lazy" decoding="async">
         </a>
     {% endfor %}
     </div>
