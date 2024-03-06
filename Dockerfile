@@ -58,4 +58,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   Wagtail instance can be started with a simple "docker run" command.
 #CMD set -xe; python manage.py migrate --noinput; gunicorn octo_momentum.wsgi:application
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "1", "octo_momentum.wsgi"]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "1", "--timeout", "1000", "octo_momentum.wsgi"]
