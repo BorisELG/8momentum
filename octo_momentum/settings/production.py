@@ -11,6 +11,16 @@ DATABASES = {
     "default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv("REDIS_LOCATION"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
