@@ -4,12 +4,28 @@ h2 {
     margin-bottom: 0.5em;
 }
 
-p {
-    margin-bottom: 2em;
-}
-
 time {
     margin-left: 0.6em;
     font-size: .8em;
     font-weight: 400;
 }
+
+.grid {
+    display: grid;
+    grid-gap: 2.5vmin;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 5fr)); /* 150px = minimum image size */
+    grid-auto-flow: dense;
+    padding: 2em 0;
+  }
+
+  .grid a {
+    position: relative;
+    border: 0;
+  }
+
+  .grid p {
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 1em;
+    color: var(--textcolor);
+  }

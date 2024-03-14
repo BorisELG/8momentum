@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
     {% load static %}
@@ -13,13 +13,15 @@
     <!-- <h1>{{ page.title }}</h1> -->
 
     <div class="intro">{{ page.intro|richtext }}</div>
-
-    {% for post in gallerypages %}
-        {% with post=post.specific %}
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-            <p>{{ post.intro }}</p>
-            <!-- {{ post.body|richtext }} -->
-        {% endwith %}
-    {% endfor %}
+    <div class="grid">
+        {% for post in gallerypages %}
+            {% with post=post.specific %}
+                <a href="{% pageurl post %}">
+                    {% image post.gallery_images.first.image webpquality-50 %}
+                    <p>{{ post.title }}</p>
+                </a>
+            {% endwith %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

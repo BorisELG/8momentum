@@ -18,7 +18,7 @@
 {% block body_class %}template-gallerypage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }} <time class="meta">{{ page.date }}</time></h1>
+    <!-- <h1>{{ page.title }} <time class="meta">{{ page.date }}</time></h1>
 
     {% with authors=page.authors.all %}
         {% if authors %}
@@ -36,15 +36,18 @@
 
     <div class="intro">{{ page.intro }}</div>
 
-    {{ page.body|richtext }}
-    <div class="grid gallery-container">
+    {{ page.body|richtext }} -->
+    <div class="image-grid">
     {% for item in page.gallery_images.all %}
+    <div class="image {% if item.is_portrait %}portrait{% elif item.is_landscape%}landscape{% else %}square{% endif %}">
         {% image item.image webpquality-50 as img%}
         <a href="{% image_url item.image 'original' %}" title="{{item.caption}}">
-            <img src="{% image_url item.image 'jpegquality-40' %}" alt="{{ img.alt }}" class="gallery-thumbnail" loading="lazy" decoding="async">
+            <img src="{% image_url item.image 'jpegquality-40' %}" alt="{{ img.alt }}" loading="lazy" decoding="async">
         </a>
+    </div>
     {% endfor %}
     </div>
+
 
     <p><a href="{{ page.get_parent.url }}">Return to gallery</a></p>
 

@@ -109,3 +109,9 @@ class GalleryPageGalleryImage(Orderable):
         FieldPanel("image"),
         FieldPanel("caption"),
     ]
+
+    def is_portrait(self):
+        return self.image.height > self.image.width
+
+    def is_landscape(self):
+        return self.image.width > self.image.height

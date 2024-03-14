@@ -12,8 +12,8 @@ html {
 
   /* Color scheme */
 
-  --textcolor: #dadada;
-  --bgcolor: #141414;
+  --textcolor: #000000;
+  --bgcolor: #ffffff;
   --highlight: #8f8f8f;
 
 }
@@ -34,10 +34,11 @@ body {
   color: var(--textcolor);
   background: var(--bgcolor);
   position: relative;
-  max-width: 64em;  /* remove this for a full-width layout */
-  margin: 0 auto;  /* centers the layout */
-  padding: 5vw 5vw 0 5vw;
+  margin: 0;  /* centers the layout */
+  padding: 0;
+  display: flex;
 }
+
 
 a {
   color: currentColor;
@@ -51,9 +52,21 @@ footer {
 header {
   padding-bottom: 5vw;
   display: flex;
-  flex-wrap: wrap;
+flex-wrap: wrap;
   width: 100%;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+      height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
 
 header h1 {
   font-size: 1em;
