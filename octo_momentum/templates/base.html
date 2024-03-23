@@ -39,7 +39,17 @@
 
     <body class="{% block body_class %}{% endblock %}">
 
-        {% include "includes/header.html" %}
+        <div class="sidebar">
+            {% block header %}
+            {% include "includes/header.html" %}
+            {% endblock %}
+            <aside>
+                {% block aside %}
+            {% endblock %}
+            </aside>
+
+        </div>
+
 
         {# Wrap your block content  within a <main> HTML5 tag: #}
         <main id="main">

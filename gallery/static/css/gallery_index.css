@@ -15,7 +15,6 @@ time {
     grid-gap: 2.5vmin;
     grid-template-columns: repeat(auto-fill, minmax(300px, 5fr)); /* 150px = minimum image size */
     grid-auto-flow: dense;
-    padding: 2em 0;
   }
 
   .grid a {

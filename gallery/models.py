@@ -70,7 +70,7 @@ class GalleryIndexPage(Page):
 
 class GalleryPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
+    intro = models.CharField(max_length=250, blank=True)
     body = RichTextField(blank=True)
     authors = ParentalManyToManyField("gallery.Author", blank=True)
 

@@ -11,45 +11,42 @@
 {% block extra_js %}
 <script src="{% static 'js/baguetteBox.min.js' %}"></script>
 <script type="text/javascript">
-  baguetteBox.run('.gallery-container');
+  baguetteBox.run('.image-grid');
 </script>
 {% endblock %}
 
 {% block body_class %}template-gallerypage{% endblock %}
 
+{% block header %}
+    <header>
+        <h1>
+            <a href="{{ self.get_parent.url }}">back</a>
+        </h1>
+    </header>
+{% endblock %}
+
+{% block aside %}
+<h1>{{ page.title }}</h1>
+<time class="meta">{{ page.date }}</time>
+
+<div class="intro">
+    {{ page.intro }}
+</div>
+
+{{ page.body|richtext }}
+{% endblock %}
+
 {% block content %}
-    <!-- <h1>{{ page.title }} <time class="meta">{{ page.date }}</time></h1>
-
-    {% with authors=page.authors.all %}
-        {% if authors %}
-            <h3>Posted by:</h3>
-            <ul>
-                {% for author in authors %}
-                    <li style="display: inline">
-                        {% image author.author_image fill-40x60 style="vertical-align: middle" %}
-                        {{ author.name }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-    <div class="intro">{{ page.intro }}</div>
-
-    {{ page.body|richtext }} -->
     <div class="image-grid">
-    {% for item in page.gallery_images.all %}
-    <div class="image {% if item.is_portrait %}portrait{% elif item.is_landscape%}landscape{% else %}square{% endif %}">
-        {% image item.image webpquality-50 as img%}
-        <a href="{% image_url item.image 'original' %}" title="{{item.caption}}">
-            <img src="{% image_url item.image 'jpegquality-40' %}" alt="{{ img.alt }}" loading="lazy" decoding="async">
-        </a>
+        {% for item in page.gallery_images.all %}
+            <div class="image {% if item.is_portrait %}portrait{% elif item.is_landscape%}landscape{% else %}square{% endif %}">
+                {% image item.image webpquality-50 as img%}
+                <a href="{% image_url item.image 'original' %}" title="{{item.caption}}">
+                    <img src="{% image_url item.image 'jpegquality-40' %}" alt="{{ img.alt }}" loading="lazy" decoding="async">
+                </a>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    </div>
-
-
-    <p><a href="{{ page.get_parent.url }}">Return to gallery</a></p>
 
     {% with tags=page.tags.all %}
         {% if tags %}

@@ -3,9 +3,8 @@
 }
 
 time {
-    margin-left: 0.6em;
-    font-size: .8em;
-    font-weight: 400;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .image-grid {
@@ -13,7 +12,6 @@ time {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: space-around;
-  padding: 20px;
 }
 
 .image {
@@ -27,5 +25,5 @@ time {
 }
 
 .landscape {
-  flex: 0 0 calc(100% - 10px); /* Une colonne pour les images en mode paysage */
+  flex: 0 0 calc(100%); /* Une colonne pour les images en mode paysage */
 }

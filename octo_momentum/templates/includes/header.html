@@ -1,14 +1,13 @@
 {% load wagtailcore_tags navigation_tags wagtailuserbar %}
 
 <header>
-    <a href="#main" class="skip-link">Skip to content</a>
     {% get_site_root as site_root %}
     <h1>
-        <a href="{% pageurl site_root %}">Boris El Gareh</a>
+        <a href="{% pageurl site_root %}">boris el gareh</a>
     </h1>
     <nav>
         {% for menuitem in site_root.get_children.live.in_menu %}
-        <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+        <a href="{% pageurl menuitem %}"> / {{ menuitem.title }} </a>
         {% endfor %}
     </nav>
     {% wagtailuserbar "top-right" %}
