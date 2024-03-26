@@ -108,7 +108,8 @@ aside {
   bottom: 0;
   font-size: 12px;
   font-weight: 400;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
+  padding-right: 15px;
 }
 
 aside h1 {
