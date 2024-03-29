@@ -7,7 +7,7 @@
     </h1>
     <nav>
         {% for menuitem in site_root.get_children.live.in_menu %}
-        <a href="{% pageurl menuitem %}"> / {{ menuitem.title }} </a>
+        <a href="{% pageurl menuitem %}"> + {{ menuitem.title }} </a>
         {% endfor %}
     </nav>
     {% wagtailuserbar "top-right" %}

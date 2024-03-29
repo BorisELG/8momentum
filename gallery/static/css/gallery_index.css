@@ -13,7 +13,7 @@ time {
 .grid {
     display: grid;
     grid-gap: 2.5vmin;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 5fr)); /* 150px = minimum image size */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 5fr));
     grid-auto-flow: dense;
   }
 

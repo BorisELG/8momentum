@@ -17,7 +17,8 @@
         {% for post in gallerypages %}
             {% with post=post.specific %}
                 <a href="{% pageurl post %}">
-                    {% image post.gallery_images.first.image webpquality-50 %}
+                    {% image post.gallery_images.first.image format-webp as pr_img %}
+                    <img src="{{pr_img.url}}" alt="" loading="lazy">
                     <p>{{ post.title }}</p>
                 </a>
             {% endwith %}
