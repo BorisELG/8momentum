@@ -62,12 +62,12 @@ Welcome to my personal website, 8momentum.
 
 ## Deployment
 
-This blog is designed for easy deployment on platforms like Fly.io. Configure the necessary environment variables for production settings. Consult the platform's documentation for deployment instructions.
+This blog is hosted on a bare metal server (DietPi) and served via Caddy.
 
 ## Technology Stack
 
 -   **Wagtail CMS:** Empowering creativity with a Django-based CMS, providing an amazing Python experience.
--   **Fly.io:** A modern platform for deploying and running applications globally.
+-   **DietPi & Caddy:** Hosted on a lightweight Debian-based OS with Caddy as the web server.
 -   **PostgreSQL:** A robust relational database for secure and scalable data storage.
 
 ## Why Wagtail?

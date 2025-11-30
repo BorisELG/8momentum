@@ -1,9 +1,9 @@
-8momentum.com {
+boriselgareh.com {
 	reverse_proxy localhost:8000
 	tls elgarehb@gmail.com
 }
 
-www.8momentum.com {
+www.boriselgareh.com {
 	reverse_proxy localhost:8000
 	tls elgarehb@gmail.com
 }
