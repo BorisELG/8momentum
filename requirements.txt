@@ -1,5 +1,5 @@
-Django>=5.2.7
-wagtail>=7.2
+Django>=5.1,<5.2
+wagtail>=7.0,<7.1
 gunicorn>=21.2.0,<22.0.0
 psycopg[binary]>=3.1.10,<3.2.0
 dj-database-url>=2.1.0,<3.0.0
@@ -7,4 +7,3 @@ whitenoise>=5.0,<5.1
 django-storages[s3]>=1.14.0,<2.0.0
 django-redis>=3.1.6
 django-prometheus>=2.3.1
-django-tasks>=0.9.0
