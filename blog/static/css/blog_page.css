@@ -3,7 +3,58 @@
 }
 
 time {
-    margin-left: 0.6em;
+    margin-top: 0.5em;
+    margin-left: 0em;
     font-size: .8em;
     font-weight: 400;
+    display: block;
+}
+
+.template-blogpage main {
+    flex-direction: column;
+}
+
+.template-blogpage ul {
+    list-style: none;
+    padding: 0;
+}
+
+.template-blogpage ul li {
+    margin-bottom: 10px;
+}
+
+.template-blogpage .tags button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.template-blogpage .gallery-images-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.template-blogpage .gallery-images-wrapper > div {
+
+    flex: 1 1 auto;
+
+    max-width: 320px; /* Adjust based on image size */
+
+}
+
+
+
+.template-blogpage div p {
+
+  margin-bottom: 1.2em;
+
+}
+
+
+
+.blog-body p {
+
+    margin-bottom: 1.5em;
+
 }

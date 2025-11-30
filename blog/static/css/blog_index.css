@@ -1,15 +1,36 @@
-h2 {
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 0.5em;
+/* On the blog index page, override the default flex behavior of the main element */
+.template-blogindexpage main {
+    flex-direction: column;
 }
 
-p {
-    margin-bottom: 2em;
+.blog-posts-container {
+    width: 100%;
 }
 
-time {
-    margin-left: 0.6em;
-    font-size: .8em;
-    font-weight: 400;
+.blog-post-item {
+    padding-bottom: 20px;
+    /* border-bottom: 1px solid #eee; */
+}
+
+.blog-post-item .post-header {
+    display: flex;
+    flex-direction: row; /* Explicitly set to row */
+    align-items: baseline;
+    margin-bottom: 10px; /* Add some space below the header */
+}
+
+.blog-post-item h3 {
+    margin-bottom: 0; /* Remove default h3 margin */
+}
+
+.blog-post-item time {
+    margin-top: 0.5em;
+    font-size: .9em; /* Slightly smaller than default */
+    display: block;
+}
+
+.blog-post-item .post-intro {
+    font-size: 0.9em; /* Decrease font size for intro */
+    line-height: 1.5;
+    margin-bottom: 0;
 }

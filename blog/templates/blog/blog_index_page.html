@@ -14,12 +14,18 @@
 
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in blogpages %}
-        {% with post=post.specific %}
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a><time>{{ post.date }}</time></h2>
-            <p>{{ post.intro }}</p>
-            <!-- {{ post.body|richtext }} -->
-        {% endwith %}
-    {% endfor %}
+    <div class="blog-posts-container">
+        {% for post in blogpages %}
+            {% with post=post.specific %}
+                <div class="blog-post-item">
+                    <div class="post-header">
+                        <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                    </div>
+                    <p class="post-intro">{{ post.intro }}</p>
+                    <time>{{ post.date }}</time>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -1,0 +1,13 @@
+/* Add your CSS rules for the about page here */
+.about-page-content {
+  /* max-width: 800px; Adjust this value as needed */
+  margin: 0 auto; /* Center the content */
+}
+
+.about-page-content h1 {
+  margin-bottom: 20px;
+}
+
+.about-page-content div p {
+  margin-bottom: 1.2em;
+}

@@ -13,13 +13,19 @@ time {
 .grid {
     display: grid;
     grid-gap: 2.5vmin;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 5fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-auto-flow: dense;
   }
 
   .grid a {
     position: relative;
     border: 0;
+  }
+
+  .grid img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .grid p {

@@ -122,6 +122,7 @@ aside h1 {
 
 main {
   display: flex;
+  flex-direction: column;
   float: right;
   margin-left: auto;
   width: calc(100vw - 450px);
@@ -149,9 +150,6 @@ footer {
   }
   main {
     width: 100%;
-  }
-  nav {
-    flex-direction: row;
   }
 
   header {

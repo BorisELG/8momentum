@@ -6,7 +6,7 @@
         <a href="{% pageurl site_root %}">boris el gareh</a>
     </h1>
     <nav>
-        {% for menuitem in site_root.get_children.live.in_menu %}
+        {% for menuitem in site_root.get_children.live %}
         <a href="{% pageurl menuitem %}"> + {{ menuitem.title }} </a>
         {% endfor %}
     </nav>
