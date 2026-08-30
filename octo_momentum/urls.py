@@ -19,7 +19,6 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
-    path("", include("django_prometheus.urls")),
 ]
 
 

@@ -9,7 +9,7 @@ DEBUG = True
 
 DATABASES = {
     "default": {
-        "ENGINE": "django_prometheus.db.backends.postgresql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("PG_NAME"),
         "USER": os.getenv("PG_USER"),
         "PASSWORD": os.getenv("PG_PASSWORD"),
@@ -20,7 +20,7 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django_prometheus.cache.backends.redis.RedisCache",
+        "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": os.getenv("REDIS_LOCATION"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",

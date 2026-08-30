@@ -1,9 +1,8 @@
-Django>=5.1,<5.2
-wagtail>=7.0,<7.1
+Django>=6.1,<6.2
+wagtail>=8.0,<8.1
 gunicorn>=21.2.0,<22.0.0
-psycopg[binary]>=3.1.10,<3.2.0
+psycopg[binary]>=3.2.10,<3.4
 dj-database-url>=2.1.0,<3.0.0
 whitenoise>=5.0,<5.1
 django-storages[s3]>=1.14.0,<2.0.0
-django-redis>=3.1.6
-django-prometheus>=2.3.1
+django-redis>=6.0,<7.0

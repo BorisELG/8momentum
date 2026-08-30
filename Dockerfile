@@ -1,5 +1,6 @@
-# Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.11-slim
+# Use an official Debian-based Python runtime as a parent image.
+# Django 6.1 requires Python >= 3.12.
+FROM python:3.13-slim
 
 # Add user that will be used in the container.
 RUN useradd wagtail
